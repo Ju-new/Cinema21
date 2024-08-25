@@ -1,5 +1,6 @@
 import "./App.css";
-
+import Sidebar from "./Components/Sidebar";
+import Topbar from "./Components/Topbar";
 function App() {
   return (
     <div className="app">
@@ -18,28 +19,7 @@ function App() {
   );
 }
 
-//sidebar
-const Sidebar = () => (
-  <div className="sidebar">
-    <ul>
-      <li>Dashboard</li>
-      <li>Maps</li>
-      <li>Study Space</li>
-      <li>Review</li>
-      <li className="settings">Settings</li>
-    </ul>
-  </div>
-);
 
-//topbar
-const Topbar = () => (
-  <div className="topbar">
-    <input type="text" placeholder="Cari lokasi belajar" />
-    <div className="profile">
-      <p>Dewa Zeus</p>
-    </div>
-  </div>
-);
 
 //banner
 const Banner = () => (
