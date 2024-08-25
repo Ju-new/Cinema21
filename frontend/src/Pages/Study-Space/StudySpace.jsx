@@ -17,17 +17,9 @@ function StudySpace() {
                 </div>
                 <div className="boxSS">
                     <Box 
-                    placeName={"Koica"} 
+                    placeName={"ITB - Korea Cyber Security R&D Center (KOICA)"} 
                     openingHours={"06:00-16:00"} 
                     imageUrl={"/koica.jpg"}/>
-                    <Box 
-                    placeName={"Koica"} 
-                    openingHours={"06:00-16:00"} 
-                    imageUrl={"../public/logo512.png"}/>
-                    <Box 
-                    placeName={"Koica"} 
-                    openingHours={"06:00-16:00"} 
-                    imageUrl={"../public/logo512.png"}/>
                     
                 </div>
             </div>
