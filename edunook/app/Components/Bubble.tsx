@@ -1,15 +1,14 @@
 import React from 'react';
-import './Styles.css';
 
-// Define the interface for the component's props
 interface BubbleProps {
     placeholderText: string;
 }
 
-// Use the interface in the component's props
 const Bubble: React.FC<BubbleProps> = ({ placeholderText }) => (
-    <div className="bubble">
-        <button>{placeholderText}</button> {/* Replaced the input with a paragraph element */}
+    <div className="flex">
+        <button className="text-[#6482AD] py-2 px-10 rounded-full bg-white border-2 border-[#6482AD] text-base cursor-pointer font-bold duration-300 hover:bg-[#6482AD] hover:text-white">
+            {placeholderText}
+        </button>
     </div>
 );
 
