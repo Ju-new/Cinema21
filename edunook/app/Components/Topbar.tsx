@@ -3,7 +3,7 @@ const Topbar = () => (
       <input
         type="text"
         placeholder="Search location"
-        className="w-[1000px] p-4 rounded-[20px] border border-[#ddd] text-2xl"
+        className="w-[1000px] p-4 rounded-[20px] border border-[#ddd] text-base"
       />
     </div>
   );

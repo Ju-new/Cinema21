@@ -1,16 +1,44 @@
+"use client";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Sidebar from "./Components/Sidebar";
-import Topbar from "./Components/Topbar";
 import Banner from "./Components/Banner";
+import PopularStudySpots from "./Components/PopularStudySpots";
+import Reviews from "./Components/Review";
 import "./globals.css";
+import Search from "./Components/Search";
+
+const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";
 
 function App() {
+  const [places, setPlaces] = useState({});
+  const [sort, setSort] = useState({ sort: "rating", order: "desc" });
+  const [filterFacilities, setFilterFacilities] = useState([]);
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const getAllPlaces = async () => {
+      try {
+        const url = `${base_url}?page=${page}&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
+        const { data } = await axios.get(url);
+        setPlaces(data);
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getAllPlaces();
+  }, [sort, filterFacilities, page, search]);
+
   return (
     <div className="flex bg-[#f3eaea] min-h-screen min-w-screen max-h-full max-w-full">
       <Sidebar />
       <div className="flex-1 p-5">
-        <Topbar />
+        <Search setSearch={(search) => setSearch(search)} />
         <div className="flex mt-2">
-          <div className="flex-2 mx-6">
+          <div className="flex-2 mx-2 mt-5">
             <Banner />
             <PopularStudySpots />
           </div>
@@ -20,41 +48,5 @@ function App() {
     </div>
   );
 }
-
-const PopularStudySpots = () => (
-  <div className="mb-5 bg-white p-5 rounded-2xl">
-    <h3 className="mb-5">Popular Study Spots</h3>
-    <div className="flex gap-5">
-      <div className="bg-white p-5 rounded-2xl shadow-lg flex-1">
-        <h4 className="text-lg">Digital Library Gedung KOICA</h4>
-        <p className="text-[#7d98c3] text-sm">Open 08.00 - 16.00</p>
-        <button className="bg-transparent border-none text-[#5f5f5f] cursor-pointer p-0">See more information</button>
-      </div>
-      <div className="bg-white p-5 rounded-2xl shadow-lg flex-1">
-        <h4 className="text-lg">Warunk Upnormal Sumur Bandung</h4>
-        <p className="text-[#7d98c3] text-sm">Open 09.00 - 00.00</p>
-        <button className="bg-transparent border-none text-[#5f5f5f] cursor-pointer p-0">See more information</button>
-      </div>
-    </div>
-  </div>
-);
-
-const Reviews = () => (
-  <div className="flex-1 pt-2 pr-5 pl-5 rounded-lg shadow-md max-w-[290px] mr-5 bg-white">
-    <h3 className="mb-5 text-lg">Reviews</h3>
-    <div className="mb-10 bg-[#7d98c3] rounded-lg p-3">
-      <h4 className="text-lg text-white">Dewi Athena</h4>
-      <p className="text-sm text-white">"Most students study here. The building is modern, equipped with Wi-Fi, and has air conditioning."</p>
-    </div>
-    <div className="mb-10 bg-[#7d98c3] rounded-lg p-3">
-      <h4 className="text-lg text-white">Dewa Demeter</h4>
-      <p className="text-sm text-white">"Very comfy, open 24 hours, and the perfect place for group discussions."</p>
-    </div>
-    <div className="mb-10 bg-[#7d98c3] rounded-lg p-3">
-      <h4 className="text-lg text-white">Dewa Ares</h4>
-      <p className="text-sm text-white">"This is where the top students study, and the food is delicious."</p>
-    </div>
-  </div>
-);
 
 export default App;
