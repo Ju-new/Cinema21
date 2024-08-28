@@ -11,7 +11,7 @@ import Search from "./Components/Search";
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";
 
 function App() {
-  const [obj, setObj] = useState({});
+  const [places, setPlaces] = useState({});
   const [sort, setSort] = useState({ sort: "rating", order: "desc" });
   const [filterFacilities, setFilterFacilities] = useState([]);
   const [page, setPage] = useState(1);
@@ -22,7 +22,7 @@ function App() {
       try {
         const url = `${base_url}?page=${page}&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
         const { data } = await axios.get(url);
-        setObj(data);
+        setPlaces(data);
         console.log(data);
       } catch (err) {
         console.log(err);
