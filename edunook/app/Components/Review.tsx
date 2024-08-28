@@ -1,7 +1,7 @@
 import React from "react";
 
 const Reviews: React.FC = () => (
-  <div className="flex-1 pt-2 pr-5 pl-5 rounded-xl shadow-md max-w-[290px] max-h-[600px] mr-5 bg-white ml-5">
+  <div className="flex-1 pt-2 pr-5 pl-5 rounded-xl shadow-md max-w-[290px] max-h-[600px] mr-5 bg-white ml-5 mt-5">
     <h3 className="mb-5 mt-5 text-xl font-bold">Reviews</h3>
     <div className="mb-10 bg-[#7d98c3] rounded-xl p-3">
       <h4 className="text-lg text-white mb-4 font-bold">Dewi Athena</h4>
