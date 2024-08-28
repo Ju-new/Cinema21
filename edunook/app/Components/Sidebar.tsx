@@ -18,7 +18,7 @@ const Sidebar = () => {
 
   return (
     <div className="w-64 h-screen bg-[#f8f9fa] p-14 mr-8">
-      <ul className="list-none flex flex-col text-xl">
+      <ul className="list-none flex flex-col text-xl mt-14">
         {links.map((link) => (
           <li key={link.name} className="my-2 relative">
             <button

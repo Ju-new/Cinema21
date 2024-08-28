@@ -5,7 +5,7 @@ import "./globals.css";
 
 function App() {
   return (
-    <div className="flex bg-[#f3eaea] min-h-screen min-w-screen">
+    <div className="flex bg-[#f3eaea] min-h-screen min-w-screen max-h-full max-w-full">
       <Sidebar />
       <div className="flex-1 p-5">
         <Topbar />

@@ -6,7 +6,7 @@ interface BoxProps {
 }
 
 const Box: React.FC<BoxProps> = ({ placeName, openingHours, imageUrl }) => (
-    <button className="flex flex-col p-8 border-none overflow-hidden h-full w-72 cursor-pointer items-center transition-colors duration-300 rounded-2xl bg-transparent hover:bg-gray-200">
+    <button className="flex flex-col p-8 border-none overflow-hidden w-72 cursor-pointer items-center transition-colors duration-300 rounded-2xl bg-transparent hover:bg-gray-200">
         <img src={imageUrl} alt={placeName} className="w-full h-52 object-cover rounded-2xl shadow-md" />
         <div className="p-4 flex flex-col items-center">
             <div className="text-xl font-bold mb-2 text-black text-center">{placeName}</div>
