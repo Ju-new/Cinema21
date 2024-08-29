@@ -1,23 +1,30 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation"; // Import the useRouter hook
+import { usePathname, useRouter } from "next/navigation"; // Import the useRouter hook
+import clsx from 'clsx'
+import { Place } from "../Objects/Place";
+
+const links = [
+  {}
+]
 
 interface BoxProps {
   placeName: string;
   openingHours: string;
   imageUrl: string;
+  place?: Place;
 }
 
-const Box: React.FC<BoxProps> = ({ placeName, openingHours, imageUrl }) => {
+const Box: React.FC<BoxProps> = ({ placeName, openingHours, imageUrl, place }) => {
   const router = useRouter(); // Initialize the useRouter hook
 
   const handleClick = () => {
-    router.push(`/study-space/${encodeURIComponent(placeName)}`); // Navigate to the detail page
+    router.push(`/Pages/StudySpace/${place?._id})}`); 
   };
 
   return (
     <button
-      className="flex flex-col p-8 border-none overflow-hidden h-full w-72 cursor-pointer items-center transition-colors duration-300 rounded-2xl bg-transparent hover:bg-gray-200"
+      className="flex flex-col p-8 border-none overflow-hidden w-72 cursor-pointer items-center transition-colors duration-300 rounded-2xl bg-transparent hover:bg-gray-200"
       onClick={handleClick} // Add onClick handler
     >
       <img src={imageUrl} alt={placeName} className="w-full h-52 object-cover rounded-2xl shadow-md" />
