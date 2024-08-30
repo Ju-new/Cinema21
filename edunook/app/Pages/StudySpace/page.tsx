@@ -42,22 +42,23 @@ function StudySpace() {
       try {
         const url = `${base_url}?page=${page}&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
         const { data } = await axios.get(url);
-
-        console.log("Respons dari backend:", data);
-
+  
+        console.log("Fetched places:", data.places); // Log the places array
+  
         if (data && Array.isArray(data.places)) {
           setPlaces(data.places);
         } else {
-          console.error("Data yang diterima bukan array:", data.places);
+          console.error("Data received is not an array:", data.places);
           setPlaces([]);
         }
       } catch (err) {
         console.log(err);
       }
     };
-
+  
     getAllPlaces();
   }, [sort, filterFacilities, page, search]);
+  
 
   return (
     <div className="flex min-h-screen">
@@ -73,7 +74,12 @@ function StudySpace() {
         </div>
         <div className="flex flex-wrap gap-8">
           {places.map((place) => (
-            <Box key={place._id} placeName={place.nama} openingHours={`${place.buka} - ${place.tutup}`} imageUrl={place.img} />
+            <Box 
+            key={place._id} 
+            place={place}
+            placeName={place.nama} 
+            openingHours={`${place.buka} - ${place.tutup}`} 
+            imageUrl={place.img} />
           ))}
         </div>
       </div>

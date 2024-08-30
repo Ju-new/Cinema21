@@ -1,12 +1,7 @@
 "use client";
 import React from "react";
-import { usePathname, useRouter } from "next/navigation"; // Import the useRouter hook
-import clsx from 'clsx'
+import { useRouter } from "next/navigation";
 import { Place } from "../Objects/Place";
-
-const links = [
-  {}
-]
 
 interface BoxProps {
   placeName: string;
@@ -15,17 +10,21 @@ interface BoxProps {
   place?: Place;
 }
 
-const Box: React.FC<BoxProps> = ({ placeName, openingHours, imageUrl, place }) => {
-  const router = useRouter(); // Initialize the useRouter hook
+const Box: React.FC<BoxProps> = ({ place, placeName, openingHours, imageUrl }) => {
+  const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/Pages/StudySpace/${place?._id})}`); 
+    if (place && place._id) {
+      router.push(`/Pages/StudySpace/${place._id}`);
+    } else {
+      console.error("place._id is undefined");
+    }
   };
 
   return (
     <button
       className="flex flex-col p-8 border-none overflow-hidden w-72 cursor-pointer items-center transition-colors duration-300 rounded-2xl bg-transparent hover:bg-gray-200"
-      onClick={handleClick} // Add onClick handler
+      onClick={handleClick}
     >
       <img src={imageUrl} alt={placeName} className="w-full h-52 object-cover rounded-2xl shadow-md" />
       <div className="p-4 flex flex-col items-center">
