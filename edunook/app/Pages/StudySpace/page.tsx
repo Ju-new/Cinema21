@@ -75,7 +75,7 @@ function StudySpace() {
         <div className="flex flex-wrap gap-8">
           {places.map((place) => (
             <Box 
-            key={place._id} 
+            key={ place._id } 
             place={place}
             placeName={place.nama} 
             openingHours={`${place.buka} - ${place.tutup}`} 

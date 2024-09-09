@@ -4,12 +4,18 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from "@/app/Components/Sidebar";
 import { Place } from '@/app/Objects/Place';
+import Search from '@/app/Components/Search';
 
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";
 
 const Placedetail = () => {
   const { id } = useParams(); // use 'id' here
   const [place, setPlace] = useState<Place | null>(null);
+  const [places, setPlaces] = useState<Place[]>([]);
+  const [sort, setSort] = useState({ sort: "rating", order: "desc" });
+  const [filterFacilities, setFilterFacilities] = useState<string[]>([]);
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     if (id) {
@@ -31,7 +37,7 @@ const Placedetail = () => {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="flex bg-[#f3eaea] min-h-screen min-w-screen max-h-full max-w-full">
       <Sidebar />
       <div className="flex-1 p-5">
         <h1 className="text-3xl font-bold">{place.nama}</h1>

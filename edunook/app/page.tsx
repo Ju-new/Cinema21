@@ -26,7 +26,7 @@ function App() {
         const url = `${base_url}?page=${page}&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
         const { data } = await axios.get(url)
 
-        console.log("Respons dari backend:", data);
+        console.log("Respons dari backend:", data.places);
 
         if (data && Array.isArray(data.places)) {
           setPlaces(data.places);
@@ -60,6 +60,7 @@ function App() {
               {places.map((place) => (
                 <Box 
                   key={place._id} 
+                  place={ place }
                   placeName={place.nama} 
                   openingHours={`${place.buka} - ${place.tutup}`} 
                   imageUrl={place.img} />

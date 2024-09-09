@@ -61,4 +61,17 @@ router.get("/places", async (req,res) => {
     }
 });
 
+//fetch _id
+router.get("/places/:id", async (req, res) => {
+    try {
+        const place = await Place.findById(req.params.id);
+        if(!place) {
+            return res.status(404).json({ Error: "Place not found" });
+        }
+        res.json(place);
+    } catch(error) {
+        res.status(500).json({ error: true, message: "Internal Server Error" });
+    }
+})
+
 module.exports = router;
