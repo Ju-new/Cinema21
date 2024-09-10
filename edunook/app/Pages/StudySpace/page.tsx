@@ -5,27 +5,7 @@ import Sidebar from "@/app/Components/Sidebar";
 import Search from "@/app/Components/Search";
 import Bubble from "@/app/Components/Bubble";
 import Box from "@/app/Components/Box";
-
-interface Place {
-  _id: string;
-  nama: string;
-  lokasi: string;
-  buka: string;
-  tutup: string;
-  hariTutup: string[];
-  kursi: string;
-  meja: string;
-  listrik: boolean;
-  ac: boolean;
-  bebasRokok: boolean;
-  kondusif: boolean;
-  lepasAlasKaki: boolean;
-  makan: boolean;
-  minum: boolean;
-  wifi: boolean;
-  fasilitas: string[];
-  img: string;
-}
+import { Place } from "@/app/Objects/Place";
 
 // Base URL API
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";

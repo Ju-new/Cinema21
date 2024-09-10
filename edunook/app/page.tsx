@@ -56,7 +56,7 @@ function App() {
         {isVisible && (
           <>
           <div className="flex gap-4 my-5 ml-6"/>
-            <div className="flex flex-wrap gap-8">
+            <div className="flex flex-wrap gap-8 z-10 ">
               {places.map((place) => (
                 <Box 
                   key={place._id} 
@@ -67,9 +67,10 @@ function App() {
                   )
                 )
               }
-            </div></>
+            </div>
+            </>
         )}
-        <div className="flex mt-2">
+        <div className="flex mt-2 z-0">
           <div className="flex-2 mx-2 mt-5">
             <Banner />
             <PopularStudySpots />
