@@ -6,6 +6,7 @@ import Search from "@/app/Components/Search";
 import Bubble from "@/app/Components/Bubble";
 import Box from "@/app/Components/Box";
 import { Place } from "@/app/Objects/Place";
+import Pagination from "@/app/Components/Pagination";
 
 
 // Base URL API
@@ -17,18 +18,21 @@ function StudySpace() {
   const [filterFacilities, setFilterFacilities] = useState<string[]>([]);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [total, setTotal] = useState(0);
+  const limit = 10;
 
   useEffect(() => {
     const getAllPlaces = async () => {
       try {
-        const url = `${base_url}?page=${page}&limit=18&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
+        const url = `${base_url}?page=${page}&limit=${limit}&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
 
         const { data } = await axios.get(url);
   
-        console.log("Fetched places:", data.places); // Log the places array
+        console.log("Fetched places:", data.places); 
   
         if (data && Array.isArray(data.places)) {
           setPlaces(data.places);
+          setTotal(data.total || 0)
         } else {
           console.error("Data received is not an array:", data.places);
           setPlaces([]);
@@ -54,7 +58,7 @@ function StudySpace() {
           <Bubble placeholderText="near ITB Jatinangor" />
           <Bubble placeholderText="near ITB Cirebon" />
         </div>
-        <div className="flex flex-wrap flex-row">
+        <div className="flex flex-wrap flex-row w-full sm:w-full md:w-4/5 lg:w-4/5 xl:w-5/6 max-h-[750px] overflow-hidden">
           {places.map((place) => (
             <Box 
             key={ place._id } 
@@ -64,6 +68,12 @@ function StudySpace() {
             imageUrl={place.img} />
           ))}
         </div>
+        <Pagination 
+        page={page}
+        limit={limit}
+        total={total}
+        setPage={(newPage => setPage(newPage))}
+        />
       </div>
     </div>
   );
