@@ -7,6 +7,7 @@ import Bubble from "@/app/Components/Bubble";
 import Box from "@/app/Components/Box";
 import { Place } from "@/app/Objects/Place";
 
+
 // Base URL API
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";
 
@@ -20,7 +21,8 @@ function StudySpace() {
   useEffect(() => {
     const getAllPlaces = async () => {
       try {
-        const url = `${base_url}?page=${page}&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
+        const url = `${base_url}?page=${page}&limit=18&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
+
         const { data } = await axios.get(url);
   
         console.log("Fetched places:", data.places); // Log the places array
@@ -41,18 +43,18 @@ function StudySpace() {
   
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-4">
       <Sidebar />
       <div className="flex-1 flex flex-col p-5">
         {" "}
-        <Search setSearch={(search) => setSearch(search)} /> {/* Komponen pencarian di atas */}
+        <Search setSearch={(search) => setSearch(search)} />
         <div className="flex gap-4 my-5 ml-6">
           {" "}
           <Bubble placeholderText="near ITB Ganesha" />
           <Bubble placeholderText="near ITB Jatinangor" />
           <Bubble placeholderText="near ITB Cirebon" />
         </div>
-        <div className="flex flex-wrap gap-8">
+        <div className="flex flex-wrap flex-row">
           {places.map((place) => (
             <Box 
             key={ place._id } 

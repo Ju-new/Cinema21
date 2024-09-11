@@ -17,7 +17,7 @@ const Search: React.FC<SearchProps> = ({ setSearch }) => {
     <input
       type="text"
       placeholder="Search location"
-      className="w-[1000px] p-4 rounded-[20px] border border-[#ddd] text-base text-black"
+      className="w-full sm:w-3/4 md:w-3/4 lg:w-3/5 xl:w-3/5 p-4 rounded-[20px] max-h-[76px] border border-[#ddd] text-base text-black"
       onChange={({ currentTarget: input }) => handleSearchChange(input.value)}
     />
   );
