@@ -15,7 +15,7 @@ const Placedetail = () => {
   const [places, setPlaces] = useState<Place[]>([]);
   const [search, setSearch] = useState("");
   const [isVisible, setIsVisible] = useState(false);
-
+  
 
   useEffect(() => {
     if (id) {
@@ -84,7 +84,6 @@ const Placedetail = () => {
         ) : (
           <div className="flex-1 p-5 mt-6 text-black">
             <div className="grid grid-cols-3 gap-3 mb-5">
-              {/* Main Image */}
               <img 
                 src={place.img} 
                 alt={place.nama} 

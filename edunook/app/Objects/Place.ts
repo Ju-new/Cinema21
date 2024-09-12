@@ -17,4 +17,5 @@ export interface Place {
   wifi: boolean;
   fasilitas: string[];
   img: string;
+  kampus: string;
 }
