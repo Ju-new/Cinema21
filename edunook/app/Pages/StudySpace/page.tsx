@@ -58,7 +58,7 @@ function StudySpace() {
           <Bubble placeholderText="near ITB Jatinangor" />
           <Bubble placeholderText="near ITB Cirebon" />
         </div>
-        <div className="flex flex-wrap flex-row w-full sm:w-full md:w-4/5 lg:w-4/5 xl:w-5/6 max-h-[750px] overflow-hidden">
+        <div className="flex flex-wrap flex-row w-full sm:w-full md:w-4/5 lg:w-4/5 xl:w-5/6 max-h-screen overflow-hidden">
           {places.map((place) => (
             <Box 
             key={ place._id } 

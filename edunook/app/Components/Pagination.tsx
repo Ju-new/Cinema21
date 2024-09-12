@@ -49,7 +49,7 @@ interface PaginationProps {
     };
   
     return (
-      <div className=" absolute bottom-0 left-0 w-[calc(100%-20px)] mx-[10px] mb-4 h-[45px] flex items-center justify-center z-100">
+      <div className=" absolute bottom-2 left-0 w-[calc(100%-20px)] my-2 mx-[10px] mb-4 h-[45px] flex items-center justify-center z-100">
         <button
           onClick={() => setPage(page-1)}
           disabled={page === 1}
