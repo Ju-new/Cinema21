@@ -50,9 +50,14 @@ const PopularStudySpots: React.FC = () => {
         </button>
       </div>
       <div className="pl-14 flex gap-24">
-        <div className="flex flex-wrap gap-8 overflow-y-scroll">
-          {places.slice(0, 2).map((place) => (
-            <Box key={place._id} place={place} placeName={place.nama} openingHours={`${place.buka} - ${place.tutup}`} imageUrl={place.img} />
+        <div className="flex flex-wrap gap-8">
+          {places.slice(0,3).map((place) => (
+            <Box 
+            key={ place._id } 
+            place={place}
+            placeName={place.nama} 
+            openingHours={`${place.buka} - ${place.tutup}`} 
+            imageUrl={place.img} />
           ))}
         </div>
       </div>

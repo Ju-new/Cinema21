@@ -47,11 +47,12 @@ function App() {
   };
 
   return (
-    <div className="flex bg-[#f3eaea] min-h-screen min-w-screen max-h-full max-w-full">
+    <div className="flex bg-[#f3eaea] min-h-screen max-h-full max-w-full">
       <Sidebar />
       <div className="flex-1 p-5">
+        <div className="flex flex-row">
         <Search setSearch={handleSearchChange} />
-
+        </div>
         {isVisible && (
           <>
             <div className="flex gap-4 my-5 ml-6" />
@@ -62,7 +63,7 @@ function App() {
             </div>
           </>
         )}
-        <div className="flex mt-2 z-0">
+        <div className="flex mt-2 z-0 min-w-screen">
           <div className="flex-2 mx-2 mt-5">
             <Banner />
             <PopularStudySpots />
