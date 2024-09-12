@@ -13,7 +13,7 @@ interface PaginationProps {
         key={pageNumber}
         onClick={() => setPage(pageNumber)}
         className={`mx-1 px-3 py-1 border-none rounded transition-colors duration-200 hover:bg-gray-300 focus:outline-none ${
-          pageNumber === page ? 'text-gray-600 font-bold' : 'text-gray-500'
+          pageNumber === page ? 'text-gray-600 font-bold bg-gray-200' : 'text-gray-500'
         }`}
       >
         {pageNumber}
@@ -53,14 +53,14 @@ interface PaginationProps {
         <button
           onClick={() => setPage(page-1)}
           disabled={page === 1}
-          className=" text-gray-500 px-3 py-1 border rounded hover:bg-gray-200 disabled:opacity-50"
+          className=" text-gray-500 px-3 py-1 border-none rounded hover:bg-gray-200 disabled:opacity-50"
         > Previous
           </button>
         {renderPageNumbers()}
         <button
           onClick={() => setPage(page+1)}
           disabled={page === totalPages} 
-          className="text-gray-500 px-3 py-1 border rounded hover:bg-gray-200 disabled:opacity-50"
+          className="text-gray-500 px-3 py-1 border-none rounded hover:bg-gray-200 disabled:opacity-50"
         > Next</button>
       </div>
     );
