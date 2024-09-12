@@ -24,9 +24,9 @@ const PopularStudySpots: React.FC = () => {
       try {
         const url = `${base_url}?page=${page}&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
         const { data } = await axios.get(url);
-  
+
         console.log("Fetched places:", data.places); // Log the places array
-  
+
         if (data && Array.isArray(data.places)) {
           setPlaces(data.places);
         } else {
@@ -37,7 +37,7 @@ const PopularStudySpots: React.FC = () => {
         console.log(err);
       }
     };
-  
+
     getAllPlaces();
   }, [sort, filterFacilities, page, search]);
 
@@ -51,13 +51,8 @@ const PopularStudySpots: React.FC = () => {
       </div>
       <div className="pl-14 flex gap-24">
         <div className="flex flex-wrap gap-8 overflow-y-scroll">
-          {places.slice(0,2).map((place) => (
-            <Box 
-            key={ place._id } 
-            place={place}
-            placeName={place.nama} 
-            openingHours={`${place.buka} - ${place.tutup}`} 
-            imageUrl={place.img} />
+          {places.slice(0, 2).map((place) => (
+            <Box key={place._id} place={place} placeName={place.nama} openingHours={`${place.buka} - ${place.tutup}`} imageUrl={place.img} />
           ))}
         </div>
       </div>

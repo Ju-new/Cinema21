@@ -8,14 +8,14 @@ import Reviews from "./Components/Review";
 import "./globals.css";
 import Search from "./Components/Search";
 import Box from "./Components/Box";
-import { Place } from './Objects/Place'
+import { Place } from "./Objects/Place";
 
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";
 
 function App() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [sort, setSort] = useState({ sort: "rating", order: "desc" });
-  const [filterFacilities, setFilterFacilities] = useState([]);
+  const [filterFacilities, setFilterFacilities] = useState<string[]>([]);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [isVisible, setIsVisible] = useState(false);
@@ -24,7 +24,7 @@ function App() {
     const getAllPlaces = async () => {
       try {
         const url = `${base_url}?page=${page}&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
-        const { data } = await axios.get(url)
+        const { data } = await axios.get(url);
 
         console.log("Respons dari backend:", data.places);
 
@@ -46,7 +46,6 @@ function App() {
     setIsVisible(searchValue.trim() !== "");
   };
 
-
   return (
     <div className="flex bg-[#f3eaea] min-h-screen min-w-screen max-h-full max-w-full">
       <Sidebar />
@@ -55,20 +54,13 @@ function App() {
 
         {isVisible && (
           <>
-          <div className="flex gap-4 my-5 ml-6"/>
+            <div className="flex gap-4 my-5 ml-6" />
             <div className="flex flex-wrap gap-8 z-10 ">
               {places.map((place) => (
-                <Box 
-                  key={place._id} 
-                  place={ place }
-                  placeName={place.nama} 
-                  openingHours={`${place.buka} - ${place.tutup}`} 
-                  imageUrl={place.img} />
-                  )
-                )
-              }
+                <Box key={place._id} place={place} placeName={place.nama} openingHours={`${place.buka} - ${place.tutup}`} imageUrl={place.img} />
+              ))}
             </div>
-            </>
+          </>
         )}
         <div className="flex mt-2 z-0">
           <div className="flex-2 mx-2 mt-5">

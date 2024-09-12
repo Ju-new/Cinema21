@@ -5,9 +5,9 @@ import Sidebar from "@/app/Components/Sidebar";
 import Search from "@/app/Components/Search";
 import Bubble from "@/app/Components/Bubble";
 import Box from "@/app/Components/Box";
+import Fasilitas from "@/app/Components/Fasilitas";
 import { Place } from "@/app/Objects/Place";
 
-// Base URL API
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";
 
 function StudySpace() {
@@ -16,15 +16,17 @@ function StudySpace() {
   const [filterFacilities, setFilterFacilities] = useState<string[]>([]);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [selectedCampus, setSelectedCampus] = useState<string | null>(null); // State baru untuk kampus
 
   useEffect(() => {
     const getAllPlaces = async () => {
       try {
-        const url = `${base_url}?page=${page}&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}`;
+        // Tambahkan filter kampus ke URL jika selectedCampus ada nilainya
+        const url = `${base_url}?page=${page}&sort=${sort.sort},${sort.order}&fasilitas=${filterFacilities.toString()}&search=${search}${selectedCampus ? `&kampus=${selectedCampus}` : ""}`;
         const { data } = await axios.get(url);
-  
-        console.log("Fetched places:", data.places); // Log the places array
-  
+
+        console.log("Fetched places:", data.places);
+
         if (data && Array.isArray(data.places)) {
           setPlaces(data.places);
         } else {
@@ -35,32 +37,40 @@ function StudySpace() {
         console.log(err);
       }
     };
-  
+
     getAllPlaces();
-  }, [sort, filterFacilities, page, search]);
-  
+  }, [sort, filterFacilities, page, search, selectedCampus]); // Tambahkan selectedCampus ke dependency array
+
+  const allFacilities = Array.from(new Set(places.flatMap((place) => place.fasilitas || [])));
+
+  const filteredPlaces = filterFacilities.length === 0 ? places : places.filter((place) => filterFacilities.every((facility) => place.fasilitas?.includes(facility)));
 
   return (
     <div className="flex min-h-screen">
       <Sidebar />
       <div className="flex-1 flex flex-col p-5">
-        {" "}
-        <Search setSearch={(search) => setSearch(search)} /> {/* Komponen pencarian di atas */}
+        <Search setSearch={(search) => setSearch(search)} />
+
         <div className="flex gap-4 my-5 ml-6">
-          {" "}
-          <Bubble placeholderText="near ITB Ganesha" />
-          <Bubble placeholderText="near ITB Jatinangor" />
-          <Bubble placeholderText="near ITB Cirebon" />
+          <Bubble placeholderText="near ITB Ganesha" onClick={() => setSelectedCampus("ganesha")} />
+          <Bubble placeholderText="near ITB Jatinangor" onClick={() => setSelectedCampus("jatinangor")} />
+          <Bubble placeholderText="near ITB Cirebon" onClick={() => setSelectedCampus("cirebon")} />
         </div>
-        <div className="flex flex-wrap gap-8">
-          {places.map((place) => (
-            <Box 
-            key={ place._id } 
-            place={place}
-            placeName={place.nama} 
-            openingHours={`${place.buka} - ${place.tutup}`} 
-            imageUrl={place.img} />
-          ))}
+
+        <div className="flex gap-8 mt-5">
+          <div className="flex-1 w-77/100">
+            <div className="flex flex-wrap gap-4">
+              {filteredPlaces.length > 0 ? (
+                filteredPlaces.map((place) => <Box key={place._id} place={place} placeName={place.nama} openingHours={`${place.buka} - ${place.tutup}`} imageUrl={place.img} />)
+              ) : (
+                <p className="text-3xl font-bold">No places match the selected facilities..</p>
+              )}
+            </div>
+          </div>
+
+          <div className="w-23/100">
+            <Fasilitas fasilitas={allFacilities} filterFacilities={filterFacilities} setFilterFacilities={setFilterFacilities} />
+          </div>
         </div>
       </div>
     </div>
