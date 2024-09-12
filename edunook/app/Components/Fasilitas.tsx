@@ -20,12 +20,16 @@ const Fasilitas = ({ fasilitas, filterFacilities, setFilterFacilities }: Fasilit
         {fasilitas.map((fasilitasItem) => (
           <div key={fasilitasItem} className="mb-2">
             <input 
-            className="mr-4"
-            type="checkbox" 
-            value={fasilitasItem} 
-            onChange={onChange} 
-            checked={filterFacilities.includes(fasilitasItem)} />
-            <label>{fasilitasItem}</label>
+              className="mr-4 cursor-pointer" 
+              type="checkbox" 
+              id={fasilitasItem}  // Add an ID that matches the label's htmlFor
+              value={fasilitasItem} 
+              onChange={onChange} 
+              checked={filterFacilities.includes(fasilitasItem)} 
+            />
+            <label htmlFor={fasilitasItem} className="cursor-pointer">
+              {fasilitasItem}
+            </label>
           </div>
         ))}
       </div>

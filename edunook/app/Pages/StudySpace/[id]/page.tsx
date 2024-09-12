@@ -6,6 +6,8 @@ import Sidebar from "@/app/Components/Sidebar";
 import { Place } from '@/app/Objects/Place';
 import Search from '@/app/Components/Search';
 import Box from '@/app/Components/Box';  
+import Map from '@/app/Components/Map';
+
 
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";
 
@@ -63,12 +65,13 @@ const Placedetail = () => {
     return <div>Loading...</div>;
   }
 
+  const [lat, lng] = place.lokasi.split(",").map(Number);
+
   return (
     <div className="flex bg-[#f3eaea] min-h-screen min-w-screen max-h-full max-w-full">
       <Sidebar />
       <div className="flex-1 flex flex-col p-5">
         <Search setSearch={(search) => setSearch(search)} />
-        
         {isVisible ? (
           <div className="flex flex-wrap gap-8 z-10 mt-5">
             {places.map((place) => (
@@ -87,7 +90,7 @@ const Placedetail = () => {
               <img 
                 src={place.img} 
                 alt={place.nama} 
-                className="rounded-md w-full h-full object-cover"
+                className="rounded-md w-[1200px] h-[369px] object-cover"
               />
               
               <div className="col-span-2 grid grid-cols-2 gap-2">
@@ -96,7 +99,7 @@ const Placedetail = () => {
                     key={index}
                     src={imageUrl}
                     alt={`Additional image ${index + 1}`}
-                    className="rounded-md w-full h-auto object-cover"
+                    className="rounded-md w-[1000px] h-[500px] object-cover"
                   />
                 ))}
               </div>
@@ -152,6 +155,7 @@ const Placedetail = () => {
               </div>  
             </div>
             <p>Location: {place.lokasi}</p>
+            <Map lat={lat} lng={lng}/>
           </div>
         )}
       </div>

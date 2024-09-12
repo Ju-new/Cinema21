@@ -55,13 +55,15 @@ function StudySpace() {
     <div className="flex min-h-screen overflow-hidden">
       <Sidebar />
       <div className="flex-1 flex flex-col p-5 h-screen">
-        <Search setSearch={(search) => setSearch(search)} />
-        <div className="flex gap-4 my-5 ml-6">
+        <Search 
+          setSearch={(search) => setSearch(search)} 
+        />
+        <div className="flex gap-7 my-5 mt-5 ml-8">
           <Bubble placeholderText="near ITB Ganesha" onClick={() => setSelectedCampus("ganesha")} />
           <Bubble placeholderText="near ITB Jatinangor" onClick={() => setSelectedCampus("jatinangor")} />
           <Bubble placeholderText="near ITB Cirebon" onClick={() => setSelectedCampus("cirebon")} />
         </div>
-        <div className="flex gap-8 mt-5 overflow-y-auto">
+        <div className="flex gap-8 overflow-y-auto">
           <div className="flex-1 w-77/100">
             <div className="flex flex-wrap gap-4">
               {filteredPlaces.length > 0 ? (
