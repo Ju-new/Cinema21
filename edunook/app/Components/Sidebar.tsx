@@ -17,7 +17,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-70 h-screen bg-[#f8f9fa] p-14 mr-3">
+    <div className="w-70 h-screen bg-[#f8f9fa] p-14 mr-3 bg-[url('/assets2.png')] bg-no-repeat bg-bottom">
       <ul className="list-none flex flex-col text-xl">
         {links.map((link) => (
           <li key={link.name} className="my-2 relative">
