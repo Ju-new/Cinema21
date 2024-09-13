@@ -1,2 +1,0 @@
-notes:
-Component sidebar, topbar gw pindahin ke folder component biar bisa dipake ulang
