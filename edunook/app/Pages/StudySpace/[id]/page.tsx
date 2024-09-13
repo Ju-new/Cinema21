@@ -154,8 +154,11 @@ const Placedetail = () => {
               </ul>
               </div>  
             </div>
-            <p>Location: {place.lokasi}</p>
-            <Map lat={lat} lng={lng}/>
+            <h2 className="text-2xl font-bold mb-5">Location</h2>
+            <Map 
+              lat={lat} 
+              lng={lng}
+              />
           </div>
         )}
       </div>
