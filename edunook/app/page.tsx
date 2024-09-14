@@ -9,8 +9,10 @@ import "./globals.css";
 import Search from "./Components/Search";
 import Box from "./Components/Box";
 import { Place } from "./Objects/Place";
+import ProfileButton from "./Components/ProfileButton";
 
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";
+const profile_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/user";
 
 function App() {
   const [places, setPlaces] = useState<Place[]>([]);
@@ -19,6 +21,30 @@ function App() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const [username, setUsername] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<any>(null); 
+  
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    
+    if (userData) {
+      const { username } = JSON.parse(userData);
+      setUsername(username);
+    
+      const fetchUserProfile = async () => {
+        try {
+          const response = await axios.get(`${profile_url}/profile/${username}`);
+          if (response.status === 200) {
+            setUserProfile(response.data);
+          }
+        } catch (error) {
+          console.error("Error fetching user profile:", error);
+        }
+      };
+
+      fetchUserProfile();
+    }
+  }, []);
 
   useEffect(() => {
     const getAllPlaces = async () => {
@@ -36,11 +62,13 @@ function App() {
         }
       } catch (err) {
         console.log(err);
+        
       }
     };
 
     getAllPlaces();
   }, [sort, filterFacilities, page, search]);
+
   const handleSearchChange = (searchValue: string) => {
     setSearch(searchValue);
     setIsVisible(searchValue.trim() !== "");
@@ -51,14 +79,22 @@ function App() {
       <Sidebar />
       <div className="flex-1 p-5">
         <div className="flex flex-row">
-        <Search setSearch={handleSearchChange} />
+          <Search setSearch={handleSearchChange} />
+          <ProfileButton
+            username={username} />
         </div>
         {isVisible && (
           <>
             <div className="flex gap-4 my-5 ml-6" />
             <div className="flex flex-wrap gap-8 z-10 ">
               {places.map((place) => (
-                <Box key={place._id} place={place} placeName={place.nama} openingHours={`${place.buka} - ${place.tutup}`} imageUrl={place.img} />
+                <Box
+                  key={place._id}
+                  place={place}
+                  placeName={place.nama}
+                  openingHours={`${place.buka} - ${place.tutup}`}
+                  imageUrl={place.img}
+                />
               ))}
             </div>
           </>

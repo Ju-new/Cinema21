@@ -44,7 +44,7 @@ const Signup: React.FC = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="password"
@@ -54,7 +54,7 @@ const Signup: React.FC = () => {
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button type="submit" className="w-full bg-[#89a3c6] text-white py-2 rounded-lg hover:bg-[#6f85a1] transition-colors">
+          <button type="submit" className="w-full bg-[#89a3c6] text- py-2 rounded-lg hover:bg-[#6f85a1] transition-colors">
             Create account
           </button>
         </form>
