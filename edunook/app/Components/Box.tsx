@@ -26,7 +26,7 @@ const Box: React.FC<BoxProps> = ({ place, placeName, openingHours, imageUrl }) =
       <img src={imageUrl} alt={placeName} className="w-full h-52 object-cover rounded-2xl shadow-md" />
       <div className="p-4 flex flex-col items-center">
         <div className="text-xl font-bold mb-2 text-black text-center">{placeName}</div>
-        <div className="text-sm text-blue-400 text-center">{openingHours}</div>
+        <div className="text-sm text-blue-400 text-center bottom-0">Open {openingHours}</div>
       </div>
     </button>
   );

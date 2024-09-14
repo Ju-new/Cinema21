@@ -92,16 +92,9 @@ const Placedetail = () => {
                 alt={place.nama} 
                 className="rounded-md w-[1200px] h-[369px] object-cover"
               />
-              
               <div className="col-span-2 grid grid-cols-2 gap-2">
-                {place.additionalImages && place.additionalImages.slice(0, 4).map((imageUrl, index) => (
-                  <img
-                    key={index}
-                    src={imageUrl}
-                    alt={`Additional image ${index + 1}`}
-                    className="rounded-md w-[1000px] h-[500px] object-cover"
-                  />
-                ))}
+                <h2  
+                >Images</h2>
               </div>
             </div>
             <h1 className="text-4xl font-bold">{place.nama}</h1>
