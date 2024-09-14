@@ -19,6 +19,10 @@ const Login: React.FC = () => {
       if (response.status === 200) {
         // Store user session (e.g., token or user info)
         localStorage.setItem("user", JSON.stringify(response.data.user));
+       
+        //Savve username
+        const loggedInUser = response.data.user.username;
+        localStorage.setItem("username", loggedInUser);
 
         // Redirect to home or profile page
         router.push("/");
