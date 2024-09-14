@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Head from "next/head";
+
 
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/auth";
 
