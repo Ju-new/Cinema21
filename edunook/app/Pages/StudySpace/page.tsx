@@ -8,8 +8,10 @@ import Box from "@/app/Components/Box";
 import Fasilitas from "@/app/Components/Fasilitas";
 import { Place } from "@/app/Objects/Place";
 import Pagination from "@/app/Components/Pagination";
+import ProfileButton from "@/app/Components/ProfileButton";
 
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";
+const profile_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/user";
 
 function StudySpace() {
   const [places, setPlaces] = useState<Place[]>([]);
@@ -20,7 +22,31 @@ function StudySpace() {
   const [selectedCampus, setSelectedCampus] = useState<string | null>(null);
   const [total, setTotal] = useState(0);
   const limit = 8;
+  const [username, setUsername] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<any>(null); 
 
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    
+    if (userData) {
+      const { username } = JSON.parse(userData);
+      setUsername(username);
+    
+      const fetchUserProfile = async () => {
+        try {
+          const response = await axios.get(`${profile_url}/profile/${username}`);
+          if (response.status === 200) {
+            setUserProfile(response.data);
+          }
+        } catch (error) {
+          console.error("Error fetching user profile:", error);
+        }
+      };
+
+      fetchUserProfile();
+    }
+  }, []);
+  
   useEffect(() => {
     const getAllPlaces = async () => {
       try {
@@ -55,9 +81,12 @@ function StudySpace() {
     <div className="flex min-h-screen overflow-hidden">
       <Sidebar />
       <div className="flex-1 flex flex-col p-5 h-screen">
+        <div className="flex flex-row">
         <Search 
           setSearch={(search) => setSearch(search)} 
         />
+        <ProfileButton username={username}/>
+        </div>
         <div className="flex gap-7 my-5 mt-5 ml-8">
           <Bubble placeholderText="near ITB Ganesha" onClick={() => setSelectedCampus("ganesha")} />
           <Bubble placeholderText="near ITB Jatinangor" onClick={() => setSelectedCampus("jatinangor")} />

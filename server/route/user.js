@@ -12,7 +12,6 @@ router.post("/signup", async (req, res) => {
       return res.status(401).json({ message: "User already exists" });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
@@ -48,5 +47,21 @@ router.post("/login", async (req, res) => {
     console.error("Error during signup:", error);
   }
 });
+
+router.get("/profile/:username", async (req,res) => {
+  const { username } = req.params;
+  try {
+    const user = await User.findOne({ username });
+    if(!user) {
+      return res.status(404).json({message: "User not found"})
+    }
+    
+    res.status(200).json({
+      username: user.username,
+    })
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+})
 
 module.exports = router;

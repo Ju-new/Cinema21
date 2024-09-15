@@ -7,9 +7,11 @@ import { Place } from '@/app/Objects/Place';
 import Search from '@/app/Components/Search';
 import Box from '@/app/Components/Box';  
 import Map from '@/app/Components/Map';
+import ProfileButton from '@/app/Components/ProfileButton';
 
 
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/places";
+const profile_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/user";
 
 const Placedetail = () => {
   const { id } = useParams(); 
@@ -17,7 +19,30 @@ const Placedetail = () => {
   const [places, setPlaces] = useState<Place[]>([]);
   const [search, setSearch] = useState("");
   const [isVisible, setIsVisible] = useState(false);
-  
+  const [username, setUsername] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<any>(null); 
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    
+    if (userData) {
+      const { username } = JSON.parse(userData);
+      setUsername(username);
+    
+      const fetchUserProfile = async () => {
+        try {
+          const response = await axios.get(`${profile_url}/profile/${username}`);
+          if (response.status === 200) {
+            setUserProfile(response.data);
+          }
+        } catch (error) {
+          console.error("Error fetching user profile:", error);
+        }
+      };
+
+      fetchUserProfile();
+    }
+  }, []);
 
   useEffect(() => {
     if (id) {
@@ -71,7 +96,10 @@ const Placedetail = () => {
     <div className="flex bg-[#f3eaea] min-h-screen min-w-screen max-h-full max-w-full">
       <Sidebar />
       <div className="flex-1 flex flex-col p-5">
+        <div className="flex flex-row">
         <Search setSearch={(search) => setSearch(search)} />
+        <ProfileButton username={username}/>
+        </div>
         {isVisible ? (
           <div className="flex flex-wrap gap-8 z-10 mt-5">
             {places.map((place) => (
@@ -93,8 +121,6 @@ const Placedetail = () => {
                 className="rounded-md w-[1200px] h-[369px] object-cover"
               />
               <div className="col-span-2 grid grid-cols-2 gap-2">
-                <h2  
-                >Images</h2>
               </div>
             </div>
             <h1 className="text-4xl font-bold">{place.nama}</h1>
