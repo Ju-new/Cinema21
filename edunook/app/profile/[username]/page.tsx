@@ -3,6 +3,8 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Sidebar from "@/app/Components/Sidebar";
+import ProfileButton from "@/app/Components/ProfileButton";
 
 const base_url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/auth";
 
@@ -34,9 +36,24 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1 className="text-black">Welcome, {username}!</h1>
-      <p>User Details: {JSON.stringify(user)}</p>
+    <div className="flex bg-[#f3eaea] min-h-screen max-h-full max-w-full">
+      <Sidebar />
+      <div className="flex-1 p-5">
+        <div className="absolute top-0 right-0 pr-8 pt-8">
+          <ProfileButton username={user.username} />
+        </div>
+        <div className="pl-[85px] pt-[85px]">
+          <h1 className="text-black font-bold text-[50px]">Profile</h1>
+          <div className="flex flex-row items-center mt-6">
+            <img 
+              src="/avatar.jpg" 
+              alt="profile picture" 
+              className="rounded-full w-[200px] mr-8" 
+            />
+            <h2 className="text-black text-[40px] font-bold">{user.username}</h2>
+          </div>
+        </div>
+      </div>  
     </div>
   );
 };

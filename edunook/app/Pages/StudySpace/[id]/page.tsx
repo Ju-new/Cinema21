@@ -121,8 +121,6 @@ const Placedetail = () => {
                 className="rounded-md w-[1200px] h-[369px] object-cover"
               />
               <div className="col-span-2 grid grid-cols-2 gap-2">
-                <h2  
-                >Images</h2>
               </div>
             </div>
             <h1 className="text-4xl font-bold">{place.nama}</h1>
