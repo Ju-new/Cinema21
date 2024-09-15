@@ -85,7 +85,7 @@ function StudySpace() {
         <Search 
           setSearch={(search) => setSearch(search)} 
         />
-        <ProfileButton username={username}/>
+        {username && <ProfileButton username={username} />}
         </div>
         <div className="flex gap-7 my-5 mt-5 ml-8">
           <Bubble placeholderText="near ITB Ganesha" onClick={() => setSelectedCampus("ganesha")} />

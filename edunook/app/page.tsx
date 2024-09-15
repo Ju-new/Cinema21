@@ -80,8 +80,7 @@ function App() {
       <div className="flex-1 p-5">
         <div className="flex flex-row">
           <Search setSearch={handleSearchChange} />
-          <ProfileButton
-            username={username} />
+          {username && <ProfileButton username={username} />}
         </div>
         {isVisible && (
           <>

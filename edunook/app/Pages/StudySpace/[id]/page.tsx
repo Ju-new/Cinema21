@@ -98,7 +98,7 @@ const Placedetail = () => {
       <div className="flex-1 flex flex-col p-5">
         <div className="flex flex-row">
         <Search setSearch={(search) => setSearch(search)} />
-        <ProfileButton username={username}/>
+        {username && <ProfileButton username={username} />}
         </div>
         {isVisible ? (
           <div className="flex flex-wrap gap-8 z-10 mt-5">
